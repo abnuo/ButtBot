@@ -72,10 +72,11 @@ async def on_message(message):
     if message.author == bot.user:
         return
     msg = message.content
-    if msg[len(summonword)] == " ":
-      msg = msg[len(summonword)+1:len(msg)]
-    else:
-      msg = msg[len(summonword):len(msg)]
+    if "buttbot" in msg.lower():
+      if msg[len(summonword)] == " ":
+        msg = msg[len(summonword)+1:len(msg)]
+      else:
+        msg = msg[len(summonword):len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:
             f.write(msg + " ")
     with open("corpus.txt", "r", encoding="utf-8") as f:

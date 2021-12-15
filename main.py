@@ -62,8 +62,8 @@ def genString(length):
 def comb(l):
      yield from itertools.product(*([l] * 3))
 
-def buildEmbed(query,alt,image,url,page,pages):
-  return discord.Embed(title=alt, url=url, description=query, color=discord.Color.blue()).set_footer(text="Page "+str(page)+"/"+str(pages)).set_image(url=image)
+def buildEmbed(query,alt,image,url,page,pages,author):
+  return discord.Embed(title=alt, url=url, description=url, color=discord.Color.blue()).set_author(name=author.name,icon_url=author.avatar_url).set_footer(text="Page "+str(page)+"/"+str(pages)).set_image(url=image)
 
 @bot.event
 async def on_ready():
@@ -233,12 +233,13 @@ async def imgur(ctx):
 @bot.command()
 async def img(ctx):
   query = ctx.message.content.split(bot.command_prefix + sys._getframe().f_code.co_name + " ")[1]
+  author = ctx.message.author
   fetchmsg = await ctx.send("Fetching images...")
   images = duckduckgo.search(query)
   imagen = 0
   imagem = len(images)
   image = images[imagen]
-  embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem)
+  embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem,author)
   fetchmsg.delete()
   editmsg = await ctx.send(embed=embed)
   
@@ -253,19 +254,19 @@ async def img(ctx):
       if msg.content == "n":
         imagen = imagen+1
         image = images[imagen]
-        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem)
+        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem,author)
         await editmsg.edit(embed=embed)
         await msg.delete()
       elif msg.content == "b":
         imagen = imagen-1
         image = images[imagen]
-        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem)
+        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem,author)
         await editmsg.edit(embed=embed)
         await msg.delete()
       elif msg.content == "r":
         imagen = random.randint(0,len(images)-1)
         image = images[imagen]
-        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem)
+        embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem,author)
         await editmsg.edit(embed=embed)
         await msg.delete()
 @bot.command()

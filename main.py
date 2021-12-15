@@ -13,6 +13,7 @@ import aiofiles
 from concurrent.futures import ProcessPoolExecutor
 import time
 import sys
+import glob
 import random
 import tracery
 import requests
@@ -267,5 +268,24 @@ async def img(ctx):
         embed = buildEmbed(query,images[imagen]["title"],images[imagen]["image"],images[imagen]["url"],imagen,imagem)
         await editmsg.edit(embed=embed)
         await msg.delete()
+@bot.command()
+async def download(ctx):
+  url = ctx.message.content.split(bot.command_prefix + sys._getframe().f_code.co_name + " ")[1]
+  fn = genString(5)
+  await ctx.send("Downloading video...")
+  process = os.popen(f"yt-dlp {url} -o download/{fn}.mkv")
+  preprocessed = process.read()
+  process.close()
+  merged = glob.glob(f"download/{fn}.*")[0]
+  await ctx.send("Resizing...")
+  if os.path.getsize(merged) > 8000000:
+    process = os.popen(f"ffmpeg -i {merged} -preset veryslow -t 10 download/{fn}.mp4")
+  else:
+    process = os.popen(f"ffmpeg -i {merged} -preset veryslow download/{fn}.mp4")
+  preprocessed = process.read()
+  process.close()
+  await ctx.send(file=discord.File(f"download/{fn}.mp4"))
+  os.remove(merged)
+  os.remove(f"download/{fn}.mp4")
 
 bot.run(token)

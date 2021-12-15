@@ -74,7 +74,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     msg = message.content
-    if msg.lower().startswith(summonword):
+    if msg.lower().startswith(summonword) and not msg.lower() == summonword:
       if msg[len(summonword)] == " ":
         msg = msg[len(summonword)+1:len(msg)]
       else:

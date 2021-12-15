@@ -72,7 +72,7 @@ async def on_message(message):
         return
     msg = message.content
     if msg[7] == " ":
-      msg = message.contentm[8:len(msg)]
+      msg = msg[8:len(msg)]
     else:
       msg = msg[7:len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:

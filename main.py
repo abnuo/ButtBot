@@ -26,6 +26,7 @@ from tracery.modifiers import base_english
 
 config = json.loads(open("config.json", "r").read())
 summonword = "buttbot"
+talkclass = 836649499089698816
 gpt2tc = "C:\gpt2tc-2021-04-24-win64"
 token = config["token"]
 msglist = []
@@ -83,8 +84,8 @@ async def on_message(message):
         text = f.read()
     text_model = markovify.Text(text, state_size=statesize, well_formed=False)
     text_model = text_model.compile()
-    if message.channel.id == 836649499089698816:
-        changel = bot.get_channel(836649499089698816)
+    if message.channel.id == talkclass:
+        changel = bot.get_channel(talkclass)
         await changel.send(str(text_model.make_short_sentence(random.randint(50, 280))))
     if message.content.lower().startswith("buttbot") == True:
         chanle = bot.get_channel(message.channel.id)

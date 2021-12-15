@@ -1,4 +1,2 @@
 #!/usr/bin/env bash
-wget -O corpus.txt https://bruhpoggus.herokuapp.com/corpus.txt
-#wget -O corpus.txt https://abnuosite.herokuapp.com/paste/raw.php?id=RqMdQ
-#echo PreCompile
+wget -O corpus.txt https://yourapp.herokuapp.com/corpus.txt

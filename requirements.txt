@@ -1,0 +1,10 @@
+discord.py
+discord-components
+requests
+aiofiles
+tracery
+markovify
+Flask
+pybase62
+duckduckgo-images-api
+selenium

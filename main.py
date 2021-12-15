@@ -71,7 +71,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     msg = message.content
-    if msg[7] = " ":
+    if msg[7] == " ":
       msg = message.contentm[8:len(msg)]
     else:
       msg = msg[7:len(msg)]

@@ -25,6 +25,7 @@ import duckduckgo
 from tracery.modifiers import base_english
 
 config = json.loads(open("config.json", "r").read())
+summonword = "buttbot"
 gpt2tc = "C:\gpt2tc-2021-04-24-win64"
 token = config["token"]
 msglist = []
@@ -71,10 +72,10 @@ async def on_message(message):
     if message.author == bot.user:
         return
     msg = message.content
-    if msg[7] == " ":
-      msg = msg[8:len(msg)]
+    if msg[len(summonword)] == " ":
+      msg = msg[len(summonword)+1:len(msg)]
     else:
-      msg = msg[7:len(msg)]
+      msg = msg[len(summonword):len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:
             f.write(msg + " ")
     with open("corpus.txt", "r", encoding="utf-8") as f:

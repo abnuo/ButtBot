@@ -28,6 +28,7 @@ from tracery.modifiers import base_english
 config = json.loads(open("config.json", "r").read())
 summonword = "buttbot"
 talkclass = 836649499089698816
+heroku = True
 gpt2tc = "C:\gpt2tc-2021-04-24-win64"
 token = config["token"]
 msglist = []
@@ -50,7 +51,8 @@ rules = {
     'nametypes': ['#c##c##c##c#', '#c##c##c# the #BOIS# Stan#c##c##c#', '#BOIS#SuperFan#c##c##c##c#'],
     'BOIS': ['Meeed', 'Mimlo', 'Coyoboyo', 'DankyBoi', 'Shmlorp', 'Fruccus', 'Brappus', 'Jimy', 'Grantlogan', 'WSB', 'Mario', 'Wario', 'Spongebob', 'Chutnus']
 }
-#p = subprocess.Popen(["python", "server.py"])
+if heroku == True:
+  p = subprocess.Popen(["python", "server.py"])
 grammar = tracery.Grammar(rules)
 #gis = GoogleImagesSearch(config["search_api_key"], config["search_cx"])
 grammar.add_modifiers(base_english)

@@ -70,8 +70,13 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
+    msg = message.content
+    if msg[7] = " ":
+      msg = message.contentm[8:len(msg)]
+    else:
+      msg = msg[7:len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:
-            f.write(message.content + " ")
+            f.write(msg + " ")
     with open("corpus.txt", "r", encoding="utf-8") as f:
         text = f.read()
     text_model = markovify.Text(text, state_size=statesize, well_formed=False)

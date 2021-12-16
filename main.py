@@ -9,6 +9,7 @@ from urllib.parse import parse_qs
 import os
 import ast
 import asyncio
+import websockets
 import aiofiles
 from concurrent.futures import ProcessPoolExecutor
 import time
@@ -28,9 +29,9 @@ from tracery.modifiers import base_english
 config = json.loads(open("config.json", "r").read())
 summonword = "buttbot"
 talkclass = 836649499089698816
-heroku = True
 gpt2tc = "C:\gpt2tc-2021-04-24-win64"
 token = config["token"]
+heroku = True
 msglist = []
 msglistwa = []
 statesize = 1
@@ -66,6 +67,11 @@ def comb(l):
 
 def buildEmbed(query,alt,image,url,page,pages,author):
   return discord.Embed(title=alt, url=url, description=url, color=discord.Color.blue()).set_author(name=author.name,icon_url=author.avatar_url).set_footer(text="Page "+str(page)+"/"+str(pages)).set_image(url=image)
+ 
+async def hello():
+    async with websockets.connect(host) as websocket:
+        await websocket.send("Hello world!")
+        await websocket.recv()
 
 @bot.event
 async def on_ready():

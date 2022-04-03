@@ -99,10 +99,11 @@ async def on_message(message):
         msg = msg[len(summonword):len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:
         f.write(msg + " ")
+    with open("corpus.txt","rb") as f:
         newcontents = f.read()
     if heroku == True:
       contents = brainrepo.get_contents("corpus.txt")
-      brainrepo.update_file(contents.path,str(time.time()),base64.b64encode(newcontents.encode("utf-8")),contents.sha)
+      brainrepo.update_file(contents.path,str(time.time()),base64.b64encode(newcontents)),contents.sha)
     with open("corpus.txt", "r", encoding="utf-8") as f:
         text = f.read()
     text_model = markovify.Text(text, state_size=statesize, well_formed=False)

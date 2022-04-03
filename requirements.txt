@@ -3,6 +3,7 @@ discord-components
 requests
 aiofiles
 tracery
+PyGithub
 markovify
 Flask
 pybase62

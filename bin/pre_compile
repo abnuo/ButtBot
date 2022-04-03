@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-wget -O corpus.txt https://yourapp.herokuapp.com/corpus.txt
+#wget -O corpus.txt https://yourapp.herokuapp.com/corpus.txt

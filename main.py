@@ -58,7 +58,7 @@ if heroku == True:
   g = Github(os.environ["gtoken"])
   brainrepo = g.get_repo("abnuo/buttbots-brain")
   contents = brainrepo.get_contents("corpus.txt")
-  with open("corpus.txt","rb") as f:
+  with open("corpus.txt","wb") as f:
     f.write(contents.decoded_content)
 grammar = tracery.Grammar(rules)
 #gis = GoogleImagesSearch(config["search_api_key"], config["search_cx"])

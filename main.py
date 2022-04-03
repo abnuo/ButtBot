@@ -25,6 +25,7 @@ import string
 import markovify
 import duckduckgo
 from tracery.modifiers import base_english
+from github import Github
 
 config = json.loads(open("config.json", "r").read())
 summonword = "buttbot"
@@ -54,6 +55,7 @@ rules = {
 }
 if heroku == True:
   p = subprocess.Popen(["python", "server.py"])
+g = Github(os.environ["gtoken"])
 grammar = tracery.Grammar(rules)
 #gis = GoogleImagesSearch(config["search_api_key"], config["search_cx"])
 grammar.add_modifiers(base_english)

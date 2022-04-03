@@ -10,3 +10,4 @@ pybase62
 duckduckgo-images-api
 selenium
 websockets
+BeautifulSoup4

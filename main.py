@@ -55,7 +55,11 @@ rules = {
 }
 if heroku == True:
   p = subprocess.Popen(["python", "server.py"])
-g = Github(os.environ["gtoken"])
+  g = Github(os.environ["gtoken"])
+  brainrepo = g.get_repo("abnuo/buttbots-brain")
+  contents = brainrepo.get_contents("corpus.txt")
+  with open("corpus.txt","rb",encoding="utf-8") as f:
+    f.write(contents.decoded_content)
 grammar = tracery.Grammar(rules)
 #gis = GoogleImagesSearch(config["search_api_key"], config["search_cx"])
 grammar.add_modifiers(base_english)
@@ -90,7 +94,11 @@ async def on_message(message):
       else:
         msg = msg[len(summonword):len(msg)]
     with open("corpus.txt", "a+", encoding="utf-8") as f:
-            f.write(msg + " ")
+        f.write(msg + " ")
+        newcontents = f.read()
+    if heroku == True:
+      contents = brainrepo.get_contents("corpus.txt")
+      brainrepo.update_file(contents.path,str(time.time()),newcontents,contents.sha)
     with open("corpus.txt", "r", encoding="utf-8") as f:
         text = f.read()
     text_model = markovify.Text(text, state_size=statesize, well_formed=False)

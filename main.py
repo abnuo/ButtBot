@@ -9,6 +9,7 @@ from urllib.parse import parse_qs
 import os
 import ast
 import asyncio
+import base64
 import websockets
 import aiofiles
 from concurrent.futures import ProcessPoolExecutor
@@ -101,7 +102,7 @@ async def on_message(message):
         newcontents = f.read()
     if heroku == True:
       contents = brainrepo.get_contents("corpus.txt")
-      brainrepo.update_file(contents.path,str(time.time()),newcontents,contents.sha)
+      brainrepo.update_file(contents.path,str(time.time()),base64.b64encode(newcontents.encode("utf-8")),contents.sha)
     with open("corpus.txt", "r", encoding="utf-8") as f:
         text = f.read()
     text_model = markovify.Text(text, state_size=statesize, well_formed=False)

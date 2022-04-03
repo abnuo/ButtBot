@@ -8,3 +8,4 @@ Flask
 pybase62
 duckduckgo-images-api
 selenium
+websockets

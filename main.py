@@ -31,8 +31,11 @@ config = json.loads(open("config.json", "r").read())
 summonword = "buttbot"
 talkclass = 836649499089698816
 gpt2tc = "C:\gpt2tc-2021-04-24-win64"
-token = config["token"]
 heroku = True
+if heroku == True:
+  token = os.environ["token"]
+else:
+  token = config["token"]
 msglist = []
 msglistwa = []
 statesize = 1

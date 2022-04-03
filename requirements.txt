@@ -11,3 +11,4 @@ duckduckgo-images-api
 selenium
 websockets
 beautifulsoup4
+requests-html
